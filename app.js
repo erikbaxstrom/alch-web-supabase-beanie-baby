@@ -6,6 +6,7 @@ const cardSection = document.getElementById('card-section');
 /* State */
 let beanies = [];
 let error = null;
+let beanieSigns = [];
 /* Events */
 
 window.addEventListener('load', () => {
