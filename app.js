@@ -18,7 +18,6 @@ window.addEventListener('load', async () => {
     findBeanies();
     const signsResponse = await getSigns();
     beanieSigns = signsResponse.data;
-    // console.log('beanieSigns:', beanieSigns);
     displaySignsOptions();
 });
 
@@ -27,13 +26,11 @@ searchForm.addEventListener('submit', (e) => {
     const formData = new FormData(searchForm);
     const name = formData.get('name');
     const searchSign = formData.get('sign');
-    // console.log('searchSign', searchSign);
     findBeanies(name, searchSign);
 });
 
 async function findBeanies(name, searchSign) {
     const response = await getBeanies(name, searchSign);
-    // console.log('response:', response);
     error = response.error;
     beanies = response.data;
     if (error === null) {
@@ -53,9 +50,7 @@ function displayBeanies() {
 }
 
 async function displaySignsOptions() {
-    // console.log('beanieSigns:', beanieSigns);
     for (const sign of beanieSigns) {
-        // console.log('sign', sign);
         const signEl = renderSign(sign);
         signSelect.append(signEl);
     }
