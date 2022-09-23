@@ -62,6 +62,10 @@ async function displaySignsOptions() {
 }
 
 function displayMessage() {
-    messageDisplay.textContent = `Showing some of ${count}`;
+    if (error) {
+        messageDisplay.textContent = `Error ${error.message}`;
+    } else {
+        messageDisplay.textContent = `Showing ${beanies.length} of ${count}`;
+    }
 }
 // (don't forget to call any display functions you want to run on page load!)

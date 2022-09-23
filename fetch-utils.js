@@ -9,19 +9,17 @@ export async function getBeanies(name, searchSign) {
         .from('beanie_babies')
         .select('*', { count: 'exact' })
         .order('title')
-        .limit(20);
+        .limit(100);
 
     if (name) {
         query = query.ilike('title', `%${name}%`);
     }
 
     if (searchSign) {
-        // console.log('searchSign in query', searchSign);
         query = query.eq('astroSign', searchSign);
     }
 
     const response = await query;
-    // console.log('count', response.count);
     return response;
 }
 
