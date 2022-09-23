@@ -62,6 +62,6 @@ async function displaySignsOptions() {
 }
 
 function displayMessage() {
-    messageDisplay.textContent = `Showing ${beanies.length} of ${count}`;
+    messageDisplay.textContent = `Showing some of ${count}`;
 }
 // (don't forget to call any display functions you want to run on page load!)
