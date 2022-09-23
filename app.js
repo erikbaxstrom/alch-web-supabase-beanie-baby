@@ -4,6 +4,8 @@ import { renderBeanie, renderSign } from './render-utils.js';
 /* Get DOM Elements */
 const cardSection = document.getElementById('card-section');
 const signSelect = document.getElementById('sign-select');
+const searchForm = document.getElementById('search-form');
+
 /* State */
 let beanies = [];
 let error = null;
@@ -18,8 +20,15 @@ window.addEventListener('load', async () => {
     displaySignsOptions();
 });
 
-async function findBeanies() {
-    const response = await getBeanies();
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(searchForm);
+    const name = formData.get('name');
+    findBeanies(name);
+});
+
+async function findBeanies(name) {
+    const response = await getBeanies(name);
     // console.log('response:', response);
     error = response.error;
     beanies = response.data;
