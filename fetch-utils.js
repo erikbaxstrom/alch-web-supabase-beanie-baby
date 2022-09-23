@@ -8,7 +8,7 @@ export async function getBeanies(name) {
     let query = client.from('beanie_babies').select('*').order('title').limit(20);
 
     if (name) {
-        console.log('name', name);
+        query = query.ilike('title', `%${name}%`);
     }
 
     const response = await query;
