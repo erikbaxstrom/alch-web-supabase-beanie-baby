@@ -1,0 +1,18 @@
+section {
+    margin: 10px;
+}
+
+#card-section {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 1px solid black;
+    width: 275px;
+}
+
+.card img {
+    width: 100%;
+}

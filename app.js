@@ -1,11 +1,66 @@
 /* Imports */
-
+import { getBeanies, getSigns } from './fetch-utils.js';
+import { renderBeanie, renderSign } from './render-utils.js';
 /* Get DOM Elements */
+const cardSection = document.getElementById('card-section');
+const signSelect = document.getElementById('sign-select');
+const searchForm = document.getElementById('search-form');
+const messageDisplay = document.getElementById('message');
 
 /* State */
-
+let beanies = [];
+let error = null;
+let beanieSigns = [];
+let count = 0;
 /* Events */
 
+window.addEventListener('load', async () => {
+    findBeanies();
+    const signsResponse = await getSigns();
+    beanieSigns = signsResponse.data;
+    displaySignsOptions();
+});
+
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(searchForm);
+    const name = formData.get('name');
+    const searchSign = formData.get('sign');
+    findBeanies(name, searchSign);
+});
+
+async function findBeanies(name, searchSign) {
+    const response = await getBeanies(name, searchSign);
+    error = response.error;
+    beanies = response.data;
+    if (error === null) {
+        count = response.count;
+    }
+    displayBeanies();
+    displayMessage();
+}
 /* Display Functions */
 
+function displayBeanies() {
+    cardSection.innerHTML = '';
+    for (let beanie of beanies) {
+        const beanieEl = renderBeanie(beanie);
+        cardSection.append(beanieEl);
+    }
+}
+
+async function displaySignsOptions() {
+    for (const sign of beanieSigns) {
+        const signEl = renderSign(sign);
+        signSelect.append(signEl);
+    }
+}
+
+function displayMessage() {
+    if (error) {
+        messageDisplay.textContent = `Error ${error.message}`;
+    } else {
+        messageDisplay.textContent = `Showing ${beanies.length} of ${count}`;
+    }
+}
 // (don't forget to call any display functions you want to run on page load!)
