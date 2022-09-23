@@ -5,11 +5,13 @@ import { renderBeanie, renderSign } from './render-utils.js';
 const cardSection = document.getElementById('card-section');
 const signSelect = document.getElementById('sign-select');
 const searchForm = document.getElementById('search-form');
+const messageDisplay = document.getElementById('message');
 
 /* State */
 let beanies = [];
 let error = null;
 let beanieSigns = [];
+let count = 0;
 /* Events */
 
 window.addEventListener('load', async () => {
@@ -34,7 +36,11 @@ async function findBeanies(name, searchSign) {
     // console.log('response:', response);
     error = response.error;
     beanies = response.data;
+    if (error === null) {
+        count = response.count;
+    }
     displayBeanies();
+    displayMessage();
 }
 /* Display Functions */
 
@@ -53,5 +59,9 @@ async function displaySignsOptions() {
         const signEl = renderSign(sign);
         signSelect.append(signEl);
     }
+}
+
+function displayMessage() {
+    messageDisplay.textContent = `Showing ${beanies.length} of ${count}`;
 }
 // (don't forget to call any display functions you want to run on page load!)

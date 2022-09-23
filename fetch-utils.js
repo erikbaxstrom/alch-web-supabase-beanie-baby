@@ -21,7 +21,7 @@ export async function getBeanies(name, searchSign) {
     }
 
     const response = await query;
-    console.log('count', response.count);
+    // console.log('count', response.count);
     return response;
 }
 
