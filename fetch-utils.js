@@ -12,7 +12,8 @@ export async function getBeanies(name, searchSign) {
     }
 
     if (searchSign) {
-        console.log('searchSign in query', searchSign);
+        // console.log('searchSign in query', searchSign);
+        query = query.eq('astroSign', searchSign);
     }
 
     const response = await query;
