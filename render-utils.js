@@ -23,3 +23,11 @@ export function renderBeanie(beanie) {
 
     return div;
 }
+
+export function renderSign(sign) {
+    const option = document.createElement('option');
+    // console.log(sign);
+    option.textContent = sign.name;
+    option.value = sign.name;
+    return option;
+}
