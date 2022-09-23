@@ -24,11 +24,13 @@ searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(searchForm);
     const name = formData.get('name');
-    findBeanies(name);
+    const searchSign = formData.get('sign');
+    // console.log('searchSign', searchSign);
+    findBeanies(name, searchSign);
 });
 
-async function findBeanies(name) {
-    const response = await getBeanies(name);
+async function findBeanies(name, searchSign) {
+    const response = await getBeanies(name, searchSign);
     // console.log('response:', response);
     error = response.error;
     beanies = response.data;

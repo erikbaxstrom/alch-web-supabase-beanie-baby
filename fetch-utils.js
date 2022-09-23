@@ -4,11 +4,15 @@ const SUPABASE_KEY =
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function getBeanies(name) {
+export async function getBeanies(name, searchSign) {
     let query = client.from('beanie_babies').select('*').order('title').limit(20);
 
     if (name) {
         query = query.ilike('title', `%${name}%`);
+    }
+
+    if (searchSign) {
+        console.log('searchSign in query', searchSign);
     }
 
     const response = await query;
